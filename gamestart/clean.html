@@ -1,0 +1,871 @@
+<!-- Version 1.0 - Had to turn in something for class to pass -->
+<!DOCTYPE html>
+<html class="no-js">
+	<!--	
+	Inspired from Red Carpet Rampage by The Line Animation.
+	A game project for Platt College San Diego WS300
+	-->
+	<head>
+		<meta charset="utf-8" />
+		<title>Lil Poop</title>
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]--> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--for fb sharing-->
+		<meta property="og:url" content="http://samzabala.com/projects/bathroomrampage" />
+		<meta property="og:type" content="games" />
+		<meta property="og:title" content="The Lil Poop/S*** Game" />
+		<meta property="og:description" content="Get to the toilet before time and ya stank runs out!" />
+		<meta property="og:image" content="../icons/fullfav.png" />
+		<!--favicons-->
+		<link rel="shortcut icon" href="../icons/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="../icons/favicon.ico" type="image/x-icon">		
+		<link rel="apple-touch-icon" sizes="57x57" href="../icons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../icons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../icons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../icons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../icons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../icons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="../icons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../icons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#61559F">
+		<meta name="msapplication-TileImage" content="../icons/ms-icon-144x144.png">
+		<meta name="theme-color" content="#61559F">
+		<!--pang istayl-->
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../scripts/modernizr-custom.js"></script> 
+	</head>
+	<body>
+		<main>
+	 		<div id="bathroom">
+				<header  class="cf">
+					<div id="stats">
+						<div id="stank">
+							<h3>Stankiness</h3>
+							<div id="stankBar">
+								<div id="bar"></div>
+							</div>
+						</div>
+						<h3 id="score">Score: <span>0</span></h3>
+					</div>
+					<div id="timer">
+						<h3>Time Left</h3>
+						<h2>200</h2>
+					</div>
+				</header>
+				<div id="poop"></div>
+				<div id="toilet"></div>
+				<div id="startOverlay">
+					<div class="textbox">
+						<div id="bigpoop"></div>
+						<div id="finished">
+							<h1></h1>
+							<h2>Your Score: <span></span></h2>
+							<a href="#" class="share tweet" target="_blank">Tweet</a>
+							<a href="#" class="share fb" target="_blank">Share</a>
+							<div class="restart button">Play Again</div>
+						</div>
+						<section id="instructions">
+							<h1>Lil Poop</h1>
+								<p>Get to the toilet before time and ya stank runs out!</p>
+								<p class="jswarning">
+									Sorry. you need Javascript turned on to be able to play the game :(
+								</p>
+								<ul>
+									<li class="setcontainer cf">
+										<figure>
+											<img src="../images/iPO.gif" alt="ye"/>
+											<figcaption>
+												Press P and O <br>(or A and S) <br>repeatedly to run
+											</figcaption>
+										</figure>
+										<figure>
+											<img src="../images/iSpace.gif" alt="Jump on it fuckhead"/>
+											<figcaption>
+												Press the pretty Spacebar to jump the funk up
+											</figcaption>
+										</figure>
+										<figure>
+											<img src="../images/iFart.gif" alt="farts fresh from the ass"/>
+											<figcaption>
+												Catch fart clouds to restore ya poop stank
+											</figcaption>
+										</figure>
+										<figure>
+											<img src="../images/iPee.gif" alt="farts fresh from the ass"/>
+											<figcaption>
+												Step on some weewee to slip and get faster
+											</figcaption>
+										</figure>
+									</li>
+									<li class="iEnemy">
+										<figure class="cf">
+											<img src="../images/iEnemy.gif" alt="the pretentious fucks"/>
+											<figcaption>
+												Stay away from jerks that will sterilize your disgusting nature
+											</figcaption>
+										</figure>
+									</li>
+								</ul>
+								<div id="start" class="button">Start Game</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<footer>
+				<a href="dirty.html">Switch to the Dirty Version</a>
+			</footer>
+		</main>
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+		<script>
+				var poop = $('#poop');
+				var toilet = $('#toilet');
+				var bathroom = $('#bathroom');
+				var gameRunning = false,
+					score = 0,
+					timer = 200,
+					stank = 10; //life is stanky
+				//para alam mo kung saan sya papunta
+				var dir = { 
+					up: false,
+					down: false,
+					left: false
+				};
+				//peed
+				var speed = 4,
+					rSpeed = speed,
+					lSpeed = speed-1,
+					uSpeed = speed*8,
+					dSpeed = speed*2;
+				//bg
+				var bgX = 0,
+					bgXSpeed = speed+10;
+				//poopoo runnin key detection
+				var oNext = false,
+					poopIsRun = false,
+					babySteps = 0,
+					itJumped = false;
+				//intervals
+				var createEnemyInt,
+					createLifeInt,
+					theLoop,
+					addScoreInt,
+					bgMoveInt,
+					timerInt,
+					pissInt;
+				var enemyThreshold = 3000;
+				/*sounds : Music: Leck Mich Im Arsch (Lick Me In The Ass) in B flat Minor by Mozart.
+				sfx and music done in Music Studio App(xewton.com) and Bfxr(bfxr.net)*/
+				var bgMusic = new Audio('../sounds/bgmusic.mp3'),
+					brownFart = new Audio('../sounds/brownfart.mp3'),
+					ded = new Audio('../sounds/ded.mp3'),
+					greenFart = new Audio('../sounds/greenfart.mp3'),
+					jump = new Audio('../sounds/jump.mp3'),
+					ow = new Audio('../sounds/ow.mp3'),
+					win = new Audio('../sounds/win.mp3'),
+					start = new Audio('../sounds/start.mp3'),
+					walk = new Audio('../sounds/walk.mp3'),
+					spraySquirt = new Audio('../sounds/squirt.mp3');
+					peepee = new Audio('../sounds/peepee.mp3'),
+					ping = new Audio('../sounds/homebutton.mp3');
+					bgMusic.loop = true;
+				//poop's sprite bg position strings because i'm a lazy fuck
+				var steadyH = '0px -200px',
+					steadyM = '-200px -200px',
+					steadyL = '-400px -200px',
+					walkH = '0px 0px',
+					walkM = '-200px 0px',
+					walkL = ' -400px 0px',
+					jumpH = '0px -400px',
+					jumpM = '-200px -400px',
+					jumpL = '-400px -400px',
+					downH = '0px -200px',
+					downM = '-200px -200px',
+					downL = '-400px -200px';
+				var	currPoop,
+					currJumpPoop,
+					currDownPoop,
+					currSteadyPoop;
+				//MGA MENSAHE MULA SA TAE//
+				var gameOutcome;
+				var gameOutcomeMessages;
+				//for dirty version
+				// var gameWonArray =	[
+				// 						'That was impressive motherfucker',
+				// 						'U made the Lil Shit happy, look at that face...',
+				// 						'Congratulations! you won fucking nothing!',
+				// 						'Holy Shet',
+				// 						'AAAYYYYYYYYYYY',
+				// 						'Congrats, u let the Lil Shit pollute the ocean',
+				// 						'The Lil Shit\'s happily melting into the sewers now' ,
+				// 						'Fuck, you won.',
+				// 						'The Lil Shit\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
+				// 						'You actually won the fuq'
+				// 					];
+				// var gameOverArray =	[
+				// 						'You killed the Lil Shit you sadistic fuck',
+				// 						'Do u know the fuck you\'ve done?? look at the shit\'s face',
+				// 						'Wow u weak asshole',
+				// 						'Hahahahahahahaaaa what the fuck was that',
+				// 						'That was a pretty shitty work u did literally',
+				// 						'Shit\'s ded',
+				// 						'You\'re weaker than the asshole that gave birth to this shit',
+				// 						'Good job u fucking killed the Lil Shit',
+				// 						'U fucked up u punk bitch',
+				// 						'You hurt the Lil Shit\'s feelings u insensitive fuck'
+				// 					];
+				//for clean version
+				var gameWonArray =	[
+										'That was actually impressive',
+										'U made the Lil Poop happy, look at that face...',
+										'Congratulations! you won nothing!',
+										'Holy Poo',
+										'AAAYYYYYYYYYYY',
+										'Congrats, u let the Lil Poop pollute the ocean',
+										'The Lil Poop\'s happily melting into the sewers now' ,
+										'Frickity Frack, you won.',
+										'The Lil Poop\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
+										'You actually won the eff'
+									];
+				var gameOverArray =	[
+										'You killed the Lil Poop you big meanie',
+										'Do u know the hickie you\'ve done?? look at the poop\'s face',
+										'Wow u weak butt',
+										'Hahahahahahahaaaa what the bleep was that',
+										'That was a pretty poopy work u did literally',
+										'Poop\'s ded',
+										'You\'re weaker than the butt hole that gave birth to this poop',
+										'Good job u killed the Lil Poop',
+										'U screwed up u punk muffin',
+										'You hurt the Lil Poop\'s feelings u insensitive doot doot'
+									];
+				$(document).keydown(function(e){
+					// 32 for space bar coz thats what google said but IE is a bitch and they use 13 so fuck it
+					// 80 for p | 79 for o
+					// 65 for a | 83 for s
+					if(gameRunning){
+						//everything will start killing u only when u start moving because im nice sometimes
+						if(e.which == 32 || e.which == 13){
+							itJumped = true
+							dir.up = true;
+							dir.down = false;
+							//from lady gaga and taco birthing siopao
+							setTimeout(function(){
+								itJumped = false;
+								dir.up = false;
+								dir.down = true;
+							
+							},300);//holy shet
+							playSoundLang(jump);
+							walk.muted = true;
+							setTimeout(function(){
+								walk.muted = false;
+							},800);
+						}else{}
+					}
+				});//and thats the keydown
+				$(document).keyup(function(e){
+					if(gameRunning){
+						if(
+							oNext == false && e.which == 80 ||
+							oNext == false && e.which == 65
+						){
+							playSoundLang(walk);
+							if(poopIsRun){
+								poop.stop(true).animate({left: '+='+rSpeed},100,function(){
+									poop.stop();
+								});
+							}
+							if(!poopIsRun){
+								poop.css({
+									'background-position': currPoop
+								});
+								setTimeout(function(){
+									poop.css({
+										'background-position': steadyH
+									});
+								},300)
+								poop.stop(true).animate({left: '+='+100},200,function(){
+									poop.stop();
+								});
+								babySteps++;
+							}
+							oNext = true;
+						}else if(
+							oNext == true && e.which == 79 ||
+							oNext == true && e.which == 83	
+						){
+							playSoundLang(walk);
+							if(poopIsRun){
+								poop.stop(true).animate({left: '+='+rSpeed},100,function(){
+									poop.stop();
+								});
+							}
+							if(!poopIsRun){
+								poop.css({
+									'background-position': currPoop
+								});
+								setTimeout(function(){
+									poop.css({
+										'background-position': steadyH
+									});
+								},300)
+								poop.stop(true).animate({left: '+='+100},200,function(){
+									poop.stop();
+								});
+								babySteps++;
+							}
+							oNext = false;
+						}else if(
+							oNext == true && e.which == 80 ||
+							oNext == false && e.which == 79 ||
+							oNext == true && e.which == 65 ||
+							oNext == false && e.which == 83
+						){
+							if(poopIsRun){
+								dir.left = true;
+							}
+						}
+						if(e.which == 32 || e.which == 13){
+							itJumped = false;
+							walk.muted = false;
+							dir.up = false;
+							dir.down = true;
+						}
+						if(babySteps >3){
+							babySteps=3;
+						}
+						if(!poopIsRun && babySteps == 3){
+							poopIsRun = true;
+						}
+						if(poopIsRun){
+							dir.left = true;
+						}
+					}
+				});//key up to stop iit
+				function randNum(min,max){//duh
+					return Math.round(Math.random()*(max-min))+min;
+				}
+				function recthit(rectone, recttwo){//from trish
+					var r1 = $(rectone);
+					var r2 = $(recttwo);
+					var r1x = r1.offset().left;
+					var r1w = r1.width();
+					var r1y = r1.offset().top;
+					var r1h = r1.height();
+					var r2x = r2.offset().left;
+					var r2w = r2.width();
+					var r2y = r2.offset().top;
+					var r2h = r2.height();
+					if( r1y+r1h < r2y ||
+						r1y > r2y+r2h ||
+						r1x > r2x+r2w ||
+						r1x+r1w < r2x ){
+						return false;
+					}else{
+						return true;   
+					}				    
+				}
+			function circlehit(circle1, circle2){//FOR TOILET ONLY para mas effective
+					var c1 = $(circle1);
+					var c2 = $(circle2);
+					c1.r = c1.width()/2;//radius
+					c1.x = c1.position().left + c1.r;
+					c1.y = c1.position().top + c1.r;
+
+					c2.r = c2.width()/2;//radius
+					c2.x = c2.position().left + c2.r;
+					c2.y = c2.position().top + c2.r;			
+
+					var distx = c1.x - c2.x;
+					var disty = c1.y - c2.y;
+
+					var squaredist = (distx * distx) + (disty * disty);
+					return squaredist <= (c1.r + c2.r) * (c1.r + c2.r);
+
+				}
+				function enemySpeed(){//how fast they gooooo
+					if(timer <50){
+						return 1000;
+					}
+					if(timer <100){
+						return 1500;
+					}
+					if(timer <150){
+						return 2000;
+					}
+					if(timer >=150){
+						return 2500;
+					}
+				}
+				function squirt(){//reference from 'star wras battle front' thingy
+					$('.canSquirt').each(function(){
+						var water = $('<div>').addClass('water enemy');
+						var thatWater = $('.water');
+						var wWidth = 100;
+						var wTop = $(this).position().top;
+						var wLeft = ($(this).position().left)-wWidth;
+						var wSpeed = enemySpeed();
+						water.css({
+							top: wTop,
+							left: wLeft,
+							width: 5
+						});
+						bathroom.append(water);
+						water.animate({
+							left: -100
+						},{
+							duration: ((wSpeed*2)/10),
+							easing: 'linear',
+							queue: false,
+							complete:
+							function(){
+						        $(this).remove();
+							}
+						}).animate({
+							width: wWidth
+						},{
+							duration: (wSpeed/100),
+							easing: 'linear',
+							queue: false
+						});
+						playSoundLang(spraySquirt);
+					});
+				}
+				function enemyTurnUp(){
+					if(timer <50){
+						enemyThreshold =  1500;
+					}else if(timer <100){//100
+						enemyThreshold = 2000;//2000
+					}else if(timer <250){//150
+						enemyThreshold = 2500;//2500
+					}else{//150
+						enemyThreshold = 3000;
+					}
+				}
+				function createEnemy(){//duh
+					if(poopIsRun){
+						var enemy = $('<div>').addClass('enemy');
+						var enemyClassInt;
+						var sTop = poop.position().top;
+						if(timer >= 180){
+							var enemyClassInt = 1;
+						}
+						if(timer < 180){
+							var enemyClassInt = randNum(1,2);
+						}
+						if(timer < 170){
+							var enemyClassInt = randNum(1,3);
+						}
+						if(timer < 160){
+							var enemyClassInt = randNum(1,4);
+						} 
+						if(timer < 150){
+							var enemyClassInt = randNum(1,5);
+						}
+						if(enemyClassInt==1){
+							enemy.addClass('yellowSpray canSquirt');
+						}else if(enemyClassInt==2){
+							enemy.addClass('plunger');
+						}else if(enemyClassInt==3){
+							enemy.addClass('soap');
+						}else if(enemyClassInt==4){
+							enemy.addClass('brush');
+						}else if(enemyClassInt==5){
+							enemy.addClass('redSpray canSquirt');
+						}
+						var eMaxWidth = 300;
+						var eLeft = bathroom.width()+eMaxWidth;
+						var eTop;
+						var eSpeed = enemySpeed();
+						if(enemy.hasClass('yellowSpray')){
+							eTop = 450;
+						}
+						if(enemy.hasClass('plunger')){
+							eTop = sTop;
+							eSpeed-=300;
+						}
+						if(enemy.hasClass('soap')){
+							eTop = randNum(350,450);
+							eSpeed+=1000;
+						}
+						if(enemy.hasClass('brush')){
+							eTop = sTop;
+							eSpeed = ((eSpeed/10)+750);
+						}
+						if(enemy.hasClass('redSpray')){
+							eTop = randNum(300,375);
+							eSpeed-=200;
+						}
+						enemy.css({
+							top: eTop,
+							left: eLeft
+						});
+						bathroom.append(enemy);
+						enemy.animate({left: -eMaxWidth},eSpeed,'linear',function(){
+							$(this).remove();
+						});
+						enemyTurnUp();
+						//ini an magung pew pew 
+						setTimeout(squirt,(eSpeed/3));
+					}					
+					createEnemyInt = setTimeout(createEnemy,enemyThreshold);
+				}
+				function createLife(){//duh			
+					if(poopIsRun){
+						var fartCloudClassInt = randNum(1,5);
+						var fart = $('<div>').addClass('fart');
+						var fCLeft = bathroom.width()+fart.outerWidth();
+						var theClass;
+						if(
+							fartCloudClassInt == 1 ||
+							fartCloudClassInt == 2 ||
+							fartCloudClassInt == 3
+						){
+							theClass = 'brown';
+						}else{
+							theClass = 'green';
+						}
+						fart.css({
+							top: 150,
+							left: fCLeft
+						});
+						fart.addClass(theClass);
+						bathroom.append(fart);
+						fart.animate({left: - 100},5000,'linear',function(){
+							$(this).remove();
+						});
+					}	
+					createLifeInt = setTimeout(createLife,randNum(10000,20000));
+				}
+				function createPiss(){//duh			
+					if(poopIsRun){
+						var piss = $('<div>').addClass('piss');
+						var pLeft = bathroom.width()+piss.outerWidth();
+						piss.css({
+							top: 525,
+							left: pLeft
+						});
+						bathroom.append(piss);
+						piss.animate({left: - 200},3000,'linear',function(){
+							$(this).remove();
+						});
+					}
+					pissInt = setTimeout(createPiss,randNum(15000,20000));
+				}
+				function runTimer(){//duh
+					if(poopIsRun){
+						timer--;
+						$('#timer h2').text(timer);
+						if(timer<=50){
+							$('#timer h2').css({
+								color : '#800'
+							});
+						}
+						if(timer <= 0){
+							timer = 0;
+							gameOutcome = 'lost';
+							finished();
+						}
+					}
+				}
+				function addScore(){//duh
+					if(poopIsRun){
+						score+=5;
+						if(score<0){
+							score=0;
+						}
+						$('#score span').text(score);
+					}
+				}
+				function updateStankBar(){//duh
+					var percent= (stank/10)*100;
+					$('#stankBar #bar').animate({width:percent+'%'},400);
+					if(stank<=0){
+						stank = 0;
+						gameOutcome = 'lost';
+						finished();
+					}
+				}
+				function bgMove(){//para mukhang gumagalaw
+					if(poopIsRun){
+						bgX -= bgXSpeed;
+						bathroom.css({
+							'background-position' : bgX+'px 0px'
+						});	
+					}
+				}
+				function ouchie(){//when u get hit by enemies
+					playSound(ow);
+					poop.addClass('itHurt');
+					setTimeout(function(){
+						poop.removeClass('itHurt');
+					},1000);
+				}
+				function thisToilet(){//make the toilet look like its insulting the poop's incompetence
+					toilet.animate({top: 200},500)
+					.animate({top: 300},500,thisToilet);
+				}
+				//put ya sound in a function so u can stop them all in one line when game is done para tipid sa line
+				function playSoundLang(track){//eh
+					if(gameRunning){
+						track.play();
+						track.muted = false;
+					}
+					if(!gameRunning){
+						track.muted = true;
+					}
+				}function playSound(track){//pag pidi magduplicate an sound
+					var tempSound = track.cloneNode();
+					tempSound.play();
+				}
+				function gameOn(){//ini an napagana kan gabos. handle with care.
+					var newTop = 0;
+					var newLeft = 0;
+					//check and make sure it stay insiiiide and moves and all that poop
+					var sTop = poop.position().top,
+						sLeft = poop.position().left,
+						sHeight = poop.outerHeight(),
+						sWidth = poop.outerWidth();
+					var bHeight = (bathroom.innerHeight()-50);
+					var	bWidth = (bathroom.innerWidth());				
+					//for the poop to show how hurt it is aka da sprites
+					if(stank >= 7){
+						currPoop = walkH;
+						currJumpPoop = jumpH;
+						currDownPoop = downH;
+						currSteadyPoop = steadyH;
+					}
+					if(stank < 7){
+						currPoop = walkM;
+						currJumpPoop = jumpM;
+						currDownPoop = downM;
+						currSteadyPoop = steadyM;
+					}
+					if(stank <= 3){
+						currPoop = walkL;
+						currJumpPoop = jumpL;
+						currDownPoop = downL;
+						currSteadyPoop = steadyL;
+					}
+					if(dir.left){
+						newLeft -=lSpeed;
+						poop.css({
+							'background-position' : currPoop
+						});
+					}
+					if(dir.up && itJumped && !dir.down){
+						newTop -=uSpeed;
+						poop.css({
+							'background-position' : currJumpPoop
+						});
+					}
+					if(!dir.up && !itJumped && dir.down){
+						newTop +=dSpeed;
+						poop.css({
+							'background-position' : currDownPoop
+						});
+					}
+					if(sTop+newTop < 70){
+						newTop = 70;
+						newTop -= sTop;
+					}
+					if(sLeft+newLeft < -100){
+						newLeft = -100;
+						newLeft -= sLeft;
+						dir.left = false;
+						gameOutcome = 'lost';
+						finished();
+						//poops game over in here
+					}
+					if(sTop+newTop+sHeight > bHeight){
+						newTop = 0;
+						newTop += (bHeight-sTop-sHeight);
+						dir.down = false;
+					}
+					if(sLeft+newLeft+sWidth > bWidth){
+						newLeft = 0;
+						newLeft += (bWidth-sLeft-sWidth);
+					}
+					poop.css({
+						left: '+='+newLeft,
+						top: '+='+newTop
+					});
+					$('.enemy').each( function(){//to kill da poop
+						if(recthit(poop, $(this))){
+							ouchie();
+							if(
+								$(this).hasClass('yellowSpray') ||
+								$(this).hasClass('water')
+							){
+								stank--;
+								score-=50;
+							}
+							if($(this).hasClass('plunger')){
+								stank-=2;
+								score-=75;
+							}
+							if($(this).hasClass('soap')){
+								stank-=5;
+								score-=100;
+							}
+							if($(this).hasClass('brush')){
+								stank--;
+								score-=500;
+							}
+							if($(this).hasClass('redSpray')){
+								stank-=3;
+								score-=200;
+							}
+							if(score<0){
+								score=0;
+							}
+							$(this).remove();							
+							updateStankBar();
+						}
+					});
+					$('.fart').each( function(){//poop is alive-er
+						if(recthit(poop, $(this))){
+							if($(this).hasClass('brown')){
+								playSoundLang(brownFart);
+								stank++;
+								if(stank>10){
+									stank=10;
+								}
+								score+=50;
+							}
+							if($(this).hasClass('green')){
+								playSoundLang(greenFart);
+								stank = 10;
+								score+=100;
+							}
+							$(this).remove();
+							updateStankBar();
+						}
+					});
+					$('.piss').each( function(){//poop gets hold of a monster drink
+						if(recthit(poop, $(this))){
+							playSoundLang(peepee);
+							$(this).remove();
+							rSpeed=20;
+							score+=100;
+							setTimeout(function(){
+								rSpeed=speed;
+							},500)
+						}
+					});
+					toilet.each(function(){//the miracle
+						if(circlehit(poop, $(this))){
+							score+=5000;							
+							$(this).remove();
+							poop.remove();
+							gameOutcome = 'won';
+							finished();
+						}
+					});
+					if(gameRunning){
+						theLoop = window.requestAnimationFrame(gameOn);
+					}
+				}
+				function runIt(){//duh. handle with care.
+					if(gameRunning){
+						bgMusic.play();
+						thisToilet();
+						timerInt = setInterval(runTimer,1000);
+						bgMoveInt = setInterval(bgMove,1000/30);
+						addScoreInt = setInterval(addScore,125);
+						createEnemyInt = setTimeout(createEnemy,enemyThreshold);
+						pissInt = setTimeout(createPiss,randNum(15000,20000));
+						createLifeInt = setTimeout(createLife,randNum(10000,20000));
+						theLoop = window.requestAnimationFrame(gameOn);
+					}
+				}
+				function finished(){//duh. handle with care.
+					// window.cancelAnimationFrame(theLoop);
+					// window.cancelAnimationFrame(gameOn); //idk wtf the parameter should be really so no
+					if(gameOutcome == 'lost'){
+						playSoundLang(ded);
+						$('#bigpoop').css({
+							'background-position': '0px -600px'
+						});
+						gameOutcomeMessages = gameOverArray;
+						$('.tweet').attr('href','http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20samzabala.com%2Fbathroomrampage');
+						$('.fb').attr('href','https://www.facebook.com/dialog/feed?app_id=1591193187876202&link=samzabala.space%2Fprojects%2Fbathroomrampage&picture=samzabala.space%2Fprojects%2Fbathroomrampage%2Ficons%2Ffullfav.png&name=The%20Lil%20Poop%20Game&caption=%20&description=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20samzabala.com%2Fbathroomrampage&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F');
+					}
+					if(gameOutcome == 'won'){
+						playSoundLang(win);
+						$('#bigpoop').css({
+							'background-position': '0px -900px'
+						});
+						gameOutcomeMessages = gameWonArray;
+						$('.tweet').attr('href','http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20and%20got%20in%20the%20toilet%20playing%20the%20Lil%20Poop%20Game%20samzabala.com%2Fbathroomrampage');
+						$('.fb').attr('href','https://www.facebook.com/dialog/feed?app_id=1591193187876202&link=samzabala.space%2Fprojects%2Fbathroomrampage&picture=samzabala.space%2Fprojects%2Fbathroomrampage%2Ficons%2Ffullfav.png&name=The%20Lil%20Poop%20Game&caption=%20&description=I%20scored%20'+score+'%20and%20got%20in%20the%20toilet%20playing%20the%20Lil%20Poop%20Game%20samzabala.com%2Fbathroomrampage&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F');
+					};
+					theLoop = null;
+					gameRunning = false;
+					poopIsRun = false;
+					enemyThreshold = 3000;
+					clearInterval(addScoreInt);
+					clearInterval(bgMoveInt);
+					clearInterval(timerInt);
+					clearTimeout(createEnemyInt);
+					clearTimeout(createLifeInt);
+					clearTimeout(pissInt);
+					bgMusic.pause();
+					bgMusic.currentTime = 0;
+					playSoundLang.currentTime = 0;
+					message = gameOutcomeMessages[randNum(0,gameOutcomeMessages.length-1)];
+					$('.fart').remove();
+					$('.enemy').remove();
+					$('.piss').remove();
+					$('#instructions').css({display: 'none'});
+					$('#finished').css({display:'block'});
+					$('#finished h1').html(message);
+					$('h2 span').text(score);
+					$('#startOverlay').fadeIn(1000);
+					$('.textbox').fadeIn(500);
+				}
+				$('#start').click(function(){//para bako makadalagan pag dai pa nagsimula				
+					gameRunning = true;
+					start.play();
+					$('.textbox').fadeOut(500);
+					$('#startOverlay').fadeOut(1000);
+					$('#instruction').css({display: 'none'});
+					runIt();
+				});
+				$('#start').mousedown(function(){//kasosyalan
+					$(this).css({
+						'top': '.125em',
+						'-moz-box-shadow': '0px .125em #552578',
+						'-webkit-box-shadow': '0px .125em #552578',
+						'box-shadow': '0px .125em #552578'
+					});
+				});
+				$('#start').mouseup(function(){//kasosyalan pa
+					$(this).css({
+						'top': '0',
+						'-moz-box-shadow': '0px .25em #552578',
+						'-webkit-box-shadow': '0px .25em #552578',
+						'box-shadow': '0px .25em #552578'
+					});
+				});
+				$('.restart').click(function(){//kasosyalan and refresh
+					ping.play();
+					$(this).css({
+						'top': '.125em',
+						'-moz-box-shadow': '0px .125em #552578',
+						'-webkit-box-shadow': '0px .125em #552578',
+						'box-shadow': '0px .125em #552578'
+					});
+					location.reload();
+				});
+		</script>
+	</body>
+</html>

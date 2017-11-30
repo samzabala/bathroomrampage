@@ -1,0 +1,747 @@
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.cf:before,
+.cf:after {
+	content:"";
+	display: block;
+}
+
+.cf:after {
+	clear: both;
+}
+
+.cf {
+	zoom: 1;
+}
+
+/*CSS RESET*/
+	/* Every browser has a different set of defaults, so it is imporant to use a clean slate for the reset, and link it into index.html */
+
+	html, body, div, span, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	abbr, address, cite, code,
+	del, dfn, em, img, ins, kbd, q, samp,
+	small, strong, sub, sup, var,
+	b, i,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, figcaption, figure, 
+	footer, header, main, menu, nav, section, summary, 
+	time, mark, audio, video {
+		margin:0;
+		padding:0;
+		border:0;
+		outline:0;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+	}
+
+	body {
+		line-height:1;
+	}
+
+	article,aside,details,figcaption,figure,
+	footer,header,main,menu,nav,section { 
+		display:block;
+	}
+
+	a {
+		margin:0;
+		padding:0;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+	}
+
+/*end of RESET*/
+
+@font-face {
+	font-family: 'silombold';
+	src: url('fonts/silombol.eot');
+	src: url('fonts/silombol.eot?#iefix') format('embedded-opentype'),
+	url('fonts/silombol.woff2') format('woff2'),
+	url('fonts/silombol.woff') format('woff'),
+	url('fonts/silombol.ttf') format('truetype'),
+	url('fonts/silombol.svg#silombold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	/*bod copy*/
+}
+
+@font-face {
+	font-family: '04b30';
+	src: url('fonts/04b_30__.eot');
+	src: url('fonts/04b_30__.eot?#iefix') format('embedded-opentype'),
+	url('fonts/04b_30__.woff2') format('woff2'),
+	url('fonts/04b_30__.woff') format('woff'),
+	url('fonts/04b_30__.ttf') format('truetype'),
+	url('fonts/04b_30__.svg#04b30') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	/*hedeng*/
+}
+
+@keyframes ouchie{
+	0%{ opacity: .5; }
+	20%{ opacity: 1; }
+	40%{ opacity: .5; }
+	60%{ opacity: 1; }
+	80%{ opacity: .5; }
+	100%{ opacity: 1; }
+}
+
+-webkit-@keyframes ouchie{
+	0%{ opacity: .5; }
+	20%{ opacity: 1; }
+	40%{ opacity: .5; }
+	60%{ opacity: 1; }
+	80%{ opacity: .5; }
+	100%{ opacity: 1; }
+}
+
+-moz-@keyframes ouchie{
+	0%{ opacity: .5; }
+	20%{ opacity: 1; }
+	40%{ opacity: .5; }
+	60%{ opacity: 1; }
+	80%{ opacity: .5; }
+	100%{ opacity: 1; }
+}
+
+
+html{
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor; 
+	position: relative;
+	height: 100%;
+	width: 100%;
+	min-width: 1200px;
+	min-height: 600px;
+}
+
+.itHurt{
+
+	animation-name: ouchie;
+	animation-duration: 1s;
+	-webkit-animation-name: ouchie;
+	-webkit-animation-duration: 1s;
+	-moz-animation-name: ouchie;
+	-moz-animation-duration: 1s;
+}
+
+body{
+	font-family: 'silombold',monospace;
+	background: #61559F url(cssimages/bodyback.gif) center center;
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0;
+}
+
+.flexbox body{
+	position: static;
+	height: 100%;
+	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+    flex: 0 0 auto;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 auto;
+	-ms-flex: 0 0 auto;
+	margin: 0;
+}
+
+
+
+a {
+	color: #662D91;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus {
+	color: #552578;
+	text-decoration: underline;
+}
+
+h1,h2,h3{
+	font-family:'04b30',monospace;
+	color: #662D91;
+}
+
+h1{
+	font-size: 36px;
+	color: #82491A;
+	width: 90%;
+	margin: 0 auto;
+}
+
+main{
+	width: 1200px;
+	margin: auto;
+	position:relative;
+	padding: 1.5em 0;
+
+}
+
+#bathroom{
+	width: 1200px;
+	height: 600px;
+	position: relative;
+	overflow: hidden;
+	background-color: #000;
+	background-image: url(cssimages/background.gif);
+	background-position: 0px 0px;
+	-webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.75);
+	-moz-box-shadow: 0 0 2px 0 rgba(0,0,0,.75);
+	box-shadow: 0 0 2px 0 rgba(0,0,0,.75);
+
+}
+
+header{
+	padding: 5px;
+	background: #9697CB;
+	border-bottom: 5px solid #7A79B9;
+	height: 70px;
+}
+
+header h3,
+header h2{
+	color: #000;
+}
+
+#stats{
+	width: 50%;
+	float: left;
+	padding:5px;
+
+}
+
+#stank{
+	vertical-align: middle;
+	margin-bottom: 8px;
+}
+
+#stank>h3{
+	display: inline-block;
+	font-size: 18px;
+	height: 18px;
+	line-height: 18px;
+}
+
+#stankBar{
+	position: relative;
+	display: inline-block;
+	outline: 4px solid #000;
+	width: 300px;
+
+}
+#bar{
+	height: 18px;
+	width: 100%;
+	background: #82491A;
+}
+
+#timer{
+	width: 25%;
+	float: right;
+	text-align: right;
+	padding:5px;
+}
+
+#timer h2{
+	font-size: 24px;
+	line-height: 30px;
+}
+
+#shit,
+#poop {
+	width: 100px;
+	height: 98px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	background-position: 0px -200px;
+	position: absolute;
+	top: 450px;
+	left: 200px;
+	z-index: 98;
+}
+
+#toilet{
+	position: absolute;
+	top: 300px;
+	right: 50px;
+	width: 200px;
+	height: 250px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	background-position: -400px -600px;
+	z-index: 96;
+}
+
+.fart{
+	width: 100px;
+	height: 99px;
+	position: absolute;
+	top: 300px;
+	left: 100px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	z-index: 50;
+}
+
+.green{
+	
+	background-position: -200px -1600px;
+}
+
+.brown{
+	
+	background-position: 0px -1600px;
+}
+
+.piss{
+	width: 200px;
+	height: 30px;
+	position: absolute;
+	top: 300px;
+	left: 100px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	background-position: -400px -1450px;
+	z-index: 50;
+}
+
+.enemy{
+	position: absolute;
+	top: 450px;
+	left: 1300px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	z-index: 97;
+}
+
+.plunger{
+	height: 100px;
+	width: 300px;
+	background-position: 0px -1200px;
+}
+
+.yellowSpray{
+	height: 100px;
+	width: 49px;
+	background-position: -400px -1200px;
+}
+
+.redSpray{
+	height: 200px;
+	width: 97px;
+	background-position: -400px -1500px;
+}
+
+.soap{
+	height: 70px;
+	width: 151px;
+	background-position: -500px -1500px;
+
+}
+
+.brush{
+	height: 82px;
+	width: 300px;
+	background-position: 0px -1400px;
+
+}
+
+.water{
+	height: 5px;
+	width: 200px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	background-position: -400px -1400px;
+	position: absolute;
+	top: 100px;
+	left: 1300px;
+}
+
+#startOverlay{
+	background-color: #000;
+	position: absolute;
+	z-index: 99;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.flexbox #startOverlay{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+    flex: 1 0 auto;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 auto;
+	-ms-flex: 1 0 auto;
+	margin: 0;
+	min-height: 100%;
+	min-width: 100%;
+	margin: 0;
+}
+
+.no-js #welcome,
+.no-js #instructions ul,
+.no-js .button,
+.no-js h1+p{
+	display: none;
+}
+
+.cannotbe,
+.jswarning {
+	display: none;
+}
+
+.no-js .cannotbe,
+.no-js .jswarning{
+	display: block;
+	color: #000;
+}
+
+
+.textbox {
+	background: #FFF;
+	position: relative;
+	padding: 2em;
+	width: 70%;
+	margin: 5% auto;
+	text-align: center;
+	border-radius: 10px;	
+	-webkit-border-radius: 10px;	
+	-moz-border-radius: 10px;
+}
+
+.no-js .textbox {
+	height: 175px;
+	padding-top: 5em;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto auto 10em;
+	left: 0;
+	right: 0;
+}
+
+.textbox p {
+	margin: .5em auto 1.5em;
+	color: #82491A;
+}
+
+#welcome p{
+	color: #000;
+}
+
+#about h1{
+	margin: 0 auto;
+}
+
+#about p{
+	color: #000;
+	width: 75%;
+	margin: .5em auto 2em;
+}
+
+.textbox h1{
+	font-size: 2.75em;
+	color: #82491A;
+	margin: 0 auto;
+}
+
+.textbox h2{
+	margin-bottom: .75em;
+	font-size: 24px;
+	color: #000;
+}
+
+.textbox li{
+	list-style: none;
+	margin-bottom: 16px;
+}
+
+.textbox ul{
+	margin: 0 0 2em;
+}
+
+#instructions h1{
+	margin: 0 auto;
+}
+
+
+
+/*.js #instructions > .instruction-wrap,
+.js #start,
+.js #switchNasty{
+	opacity:0;
+}*/
+
+
+
+.js .gameport #startOverlay .textbox{
+	opacity:0;
+}
+
+.setcontainer{
+	margin: 16px auto 0;
+}
+
+.flexbox .setcontainer{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: space-around;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+
+.setcontainer figure {
+	width: 24%;
+	min-height:100px;
+	text-align: center;
+	float: left;
+	margin: 0 .5%;
+}
+
+
+
+figure img{
+	margin: 0 auto .5em;
+}
+
+figcaption{
+	font-size: .875em;
+	width: 63%;
+	margin: 0 auto;
+}
+
+#bigshit,
+#bigpoop {
+	position: absolute;
+	bottom: -35px;
+	left: -140px;
+	width: 300px;
+	height: 265px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+	background-position: -400px -900px;
+}
+
+.no-js #bigshit,
+.no-js #bigpoop {
+	background-position: -0px -600px;
+	left: 0;
+	right: 0;
+	top: -375px;
+	margin: auto;
+}
+
+.button{
+	background: #662D91;
+	color: #FFF;
+	border: 5px solid #552578;
+	text-transform: uppercase;
+	position:relative;
+	font-size: 1.5em;
+	text-align: center;
+	width: 200px;
+	margin: 1em auto 0;
+	padding: .5em;
+	border-radius: 10px;	
+	-webkit-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	cursor: pointer;
+	-moz-box-shadow: 0px .25em #552578;
+	-webkit-box-shadow: 0px .25em #552578;
+	box-shadow: 0px .25em #552578;
+}
+
+.button:hover,
+.button:focus{
+	text-decoration: none;
+	background: #FFF;
+	color: #662D91;
+}
+
+.homebutton{
+	display: block;
+	position: relative;
+	border: 5px solid #552578;	
+	background: #662D91;
+	color: #FFF;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	width: 450px;
+	margin: 0 auto 1.5em;
+	padding: 1em;
+	font-size: 1.125em;
+	line-height: 1.125;
+	border-radius: 10px;	
+	-webkit-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	cursor: pointer;
+	-moz-box-shadow: 0px .5em #552578;
+	-webkit-box-shadow: 0px .5em #552578;
+	box-shadow: 0px .5em #552578;
+
+}
+
+.homebutton span{
+	font-family:'04b30',monospace;
+	display: block;
+}
+
+.homebutton:hover,
+.homebutton:focus {
+	text-decoration: none;
+	background: #FFF;
+	color: #662D91;
+}
+
+.homebutton:active {
+	top: .25em;
+	-moz-box-shadow: 0px .25em #552578;
+	-webkit-box-shadow: 0px .25em #552578;
+	box-shadow: 0px .25em #552578;
+}
+
+.homebutton:hover h3,
+.homebutton:focus p{
+	color: #FFF;
+}
+
+#finished{
+	display: none;
+
+}
+
+#finished h1 {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+
+#finished h2 {
+	margin-bottom:.5em;
+}
+
+#finished a {
+	text-transform: uppercase;
+	font-size: 1.5em;
+}
+
+.share{
+	padding:;
+	height: 32px;
+	line-height: 32px;
+	display: inline-block;
+	padding: 0 .5em 0 42px;
+	background-image: url(cssimages/sprites.gif);
+	background-repeat: no-repeat;
+}
+
+.fb{
+	background-position: -500px -1200px;
+}
+
+.tweet{
+	background-position: -500px -1300px;
+}
+
+footer{
+	text-align: center;
+	padding: 1em 0 3em;
+	position:absolute;
+	top:100%;
+	left:0;
+	right:0;
+}
+
+footer a{
+	display: inline-block;
+	margin:auto;
+	width: 250px;
+	background: #222;
+	color: #FFF;
+	border: 4px solid #000;
+	text-transform: uppercase;
+	position:relative;
+	font-size: .9375em;
+	padding: .5em;
+	border-radius: 10px;	
+	-webkit-border-radius: 10px;	
+	-moz-border-radius: 10px;
+	cursor: pointer;
+	-moz-box-shadow: 0px .125em #000;
+	-webkit-box-shadow: 0px .125em #000;
+	box-shadow: 0px .125em #000;
+}
+
+footer a:hover,
+footer a:focus{
+	text-decoration: none;
+	background: #FFF;
+	color: #222;
+}
+
+footer a:active {
+	top: .125em;
+	-moz-box-shadow: 0px .0em #000;
+	-webkit-box-shadow: 0px .0em #000;
+	box-shadow: 0px .0em #000;
+}

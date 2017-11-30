@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8" />
+		<title>Lil Poop/S*** Game</title>
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]--> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!--for fb sharing-->
+		<meta property="og:url" content="http://samzabala.com/bathroomrampage" />
+		<meta property="og:title" content="The Lil Poop/S*** Game" />
+		<meta property="og:description" content="Get to the toilet before time and ya stank runs out!" />
+		<meta property="og:image" content="http://samzabala.space/projects/bathroomrampage/icons/fullfav.png" />
+		<meta property="fb:app_id" content="1591193187876202" />
+		<meta property="og:type" content="product" />
+
+		<link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#61559F">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#61559F">
+
+		<!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="scripts/modernizr-custom.js"></script> 
+	</head>
+	<body>
+		<main>
+	 		<div id="bathroom">
+				<div id="startOverlay">
+					<div class="textbox">
+						<div id="bigshit"></div>
+						<h1>Lil Poop/S*** Game</h1>
+						<section class="cannotbe">
+							Sorry. you need Javascript turned on to be able to play the game :(
+						</section>
+						<section id="welcome">
+							<p>
+								Inspired from <a href="http://redcarpetrampage.com/" target="_blank">Red Carpet Rampage</a> by <a href="http://www.thelineanimation.com/" target="_blank">The Line Animation</a>.<br>A game project for Platt College San Diego designed by <a href="http://samzabala.com/" target="_blank">Sam Zabala</a>.
+							</p>
+							<div>
+								<a class="homebutton" id="clean" href="gamestart.html#clean">
+									<span>Play the Clean Version</span>
+									Safe for work and classroom appropriate!
+								</a>
+								<a class="homebutton" id="dirty" href="gamestart.html#dirty">
+									<span>Play the Dirty Version</span>
+									Full on profanity like Margo likes it!
+								</a>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>			
+		</main>
+		<!--REMEMBER TO PUT BACK CDN BECAUSE THE PLATT WIFI IS MEAN AT NIGHT-->
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script> 
+		<!-- <script src="../scripts/jquery-1.12.3.min.js"></script> -->
+		<script>
+			var	ping = new Audio('sounds/homebutton.mp3');
+
+			$('.homebutton').click(function(){
+				ping.play();
+			})
+		</script>
+
+	</body>
+</html>
