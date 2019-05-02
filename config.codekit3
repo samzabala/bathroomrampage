@@ -504,6 +504,16 @@
 		"sC": 3,
 		"tS": 0
 		},
+	"/scripts/game.new.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/scripts/game.new.min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"/scripts/modernizr-custom.js": {
 		"ft": 64,
 		"ma": 0,
