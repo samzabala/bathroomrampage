@@ -1,10 +1,17 @@
 ////////////// VARS //////////////
 	// the main siet
-        var game = {
+        var shitGame = new Game('#bathrooom');
+        
+        
+        Game = function(canvas){
+
+            var _ = this;
+
+            _.prototype = {
 
             shit : document.querySelector('#shit'),
             toilet : document.querySelector('#toilet'),
-            bathroom : document.querySelector('#bathroom'),
+            bathroom : canvas || document.querySelector('#bathroom'),
             def : {
                 speed: 4,
                 enemyThreshold : 3000,
@@ -43,61 +50,87 @@
                 peepee : new Audio('sounds/peepee.mp3'),
                 ping : new Audio('sounds/homebutton.mp3'),
             },
+            text : { // first item is clean, second is dirty ALWAYS
+                nasty : [
+                    'Clean','Dirty'
+                ],
+                heading : [
+                    'The Lil Poop',
+                    'The Lil Shit'
+                ],
+                won : [
+                    [ // clean
+                        'That was actually impressive',
+                        'U made the Lil Poop happy, look at that face...',
+                        'Congratulations! you won nothing!',
+                        'Holy Poo',
+                        'AAAYYYYYYYYYYY',
+                        'Congrats, u let the Lil Poop pollute the ocean',
+                        'The Lil Poop\'s happily melting into the sewers now' ,
+                        'Frickity Frack, you won.',
+                        'The Lil Poop\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
+                        'You actually won the eff'
+                    ],[ //dirty
+                        'That was impressive motherfucker',
+                        'U made the Lil Shit happy, look at that face...',
+                        'Congratulations! you won fucking nothing!',
+                        'Holy Shet',
+                        'AAAYYYYYYYYYYY',
+                        'Congrats, u let the Lil Shit pollute the ocean',
+                        'The Lil Shit\'s happily melting into the sewers now' ,
+                        'Fuck, you won.',
+                        'The Lil Shit\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
+                        'You actually won the fuq'
+                    ]
+                ],
+                lost : [
+                    [ // clean
+                        'You killed the Lil Poop you big meanie',
+                        'Do u know the hickie you\'ve done?? look at the poop\'s face',
+                        'Wow u weak butt',
+                        'Hahahahahahahaaaa what the bleep was that',
+                        'That was a pretty poopy work u did literally',
+                        'Poop\'s ded',
+                        'You\'re weaker than the butt hole that gave birth to this poop',
+                        'Good job u killed the Lil Poop',
+                        'U screwed up u punk muffin',
+                        'You hurt the Lil Poop\'s feelings u insensitive doot doot'
+                    ],[ //dirty
+                        'You killed the Lil Shit you sadistic fuck',
+                        'Do u know the fuck you\'ve done?? look at the shit\'s face',
+                        'Wow u weak asshole',
+                        'Hahahahahahahaaaa what the fuck was that',
+                        'That was a pretty shitty work u did literally',
+                        'Shit\'s ded',
+                        'You\'re weaker than the asshole that gave birth to this shit',
+                        'Good job u fucking killed the Lil Shit',
+                        'U fucked up u punk bitch',
+                        'You hurt the Lil Shit\'s feelings u insensitive fuck'
+                    ]
+                ],
+                instructions : [
+                    [
+                        'pretty',
+						'funk',
+						'poopy',
+						'weewee',
+						'meanies',
+                    ],
+                    [
+                        'fucking',
+                        'fuck',
+                        'shit',
+                        'piss',
+                        'assholes'
+                    ]
+                ]
+            },
             end : {
 
                 outcome : null, // won || lost
                 // messageIndex : null,
                 messages : { //first item is clean because isDirty will return false if theres no dirty hash
-                    won : [
-                        [ // clean
-                            'That was actually impressive',
-                            'U made the Lil Poop happy, look at that face...',
-                            'Congratulations! you won nothing!',
-                            'Holy Poo',
-                            'AAAYYYYYYYYYYY',
-                            'Congrats, u let the Lil Poop pollute the ocean',
-                            'The Lil Poop\'s happily melting into the sewers now' ,
-                            'Frickity Frack, you won.',
-                            'The Lil Poop\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
-                            'You actually won the eff'
-                        ],[ //dirty
-                            'That was impressive motherfucker',
-                            'U made the Lil Shit happy, look at that face...',
-                            'Congratulations! you won fucking nothing!',
-                            'Holy Shet',
-                            'AAAYYYYYYYYYYY',
-                            'Congrats, u let the Lil Shit pollute the ocean',
-                            'The Lil Shit\'s happily melting into the sewers now' ,
-                            'Fuck, you won.',
-                            'The Lil Shit\'s still dead inside. U never saved them. This was a lie. Ted Cruz is the Zodiac Killer.',
-                            'You actually won the fuq'
-                        ]
-                    ],
-                    lost : [
-                        [ // clean
-                            'You killed the Lil Poop you big meanie',
-                            'Do u know the hickie you\'ve done?? look at the poop\'s face',
-                            'Wow u weak butt',
-                            'Hahahahahahahaaaa what the bleep was that',
-                            'That was a pretty poopy work u did literally',
-                            'Poop\'s ded',
-                            'You\'re weaker than the butt hole that gave birth to this poop',
-                            'Good job u killed the Lil Poop',
-                            'U screwed up u punk muffin',
-                            'You hurt the Lil Poop\'s feelings u insensitive doot doot'
-                        ],[ //dirty
-                            'You killed the Lil Shit you sadistic fuck',
-                            'Do u know the fuck you\'ve done?? look at the shit\'s face',
-                            'Wow u weak asshole',
-                            'Hahahahahahahaaaa what the fuck was that',
-                            'That was a pretty shitty work u did literally',
-                            'Shit\'s ded',
-                            'You\'re weaker than the asshole that gave birth to this shit',
-                            'Good job u fucking killed the Lil Shit',
-                            'U fucked up u punk bitch',
-                            'You hurt the Lil Shit\'s feelings u insensitive fuck'
-                        ]
-                    ]
+                    
                 },
                 share : {
                     tw: [
@@ -108,9 +141,6 @@
                     ]
                 }, // intialize for game outcome share messages
             },
-            isDirty : (function(){
-                return window.location.hash == '#dirty';
-            }()),
 
             init : function(){
                 _ = this;
@@ -170,13 +200,33 @@
                         return _.shit.sprite[action][status];
                     },
                 }
+
+                ////////////// FUNCTIONS //////////////
+                    //is u dirty
+                    _.isDirty = (function(){
+                        return window.location.hash == '#dirty';
+                    }()),
+
+                    _.setDirty = function(){
+                        if(_.isDirty) {
+
+                        }else{
+
+                        }
+                    }
+
+                    // Generates random number to keep this shit exciting
+                    _.randNum = function(min,max){//duh
+                        return Math.round(Math.random()*(max-min))+min;
+                    };
+
+                
                     
+                _.init;
 
-
-                    return _;
+                return _;
             }
-            
-        }.init(),
+        }
 
         // intervals
             /*
