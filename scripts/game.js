@@ -692,24 +692,24 @@
 		gameShareDirty = {
 			won : {
 				fb: 'I scored '+score+' playing the Lil Shit Game!',
-				tw: 'http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20playing%20the%20Lil%20Shit%20Game%20and%20won!%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
+				tw: 'http://twitter.com/intent/tweet?url=I%20scored%20'+score+'%20playing%20the%20Lil%20Shit%20Game%20and%20won!%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
 
 			},
 			lost : {
 				fb: 'I scored '+score+' playing the Lil Shit Game and won!',
-				tw: 'http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20playing%20the%20Lil%20Shit%20Game%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
+				tw: 'http://twitter.com/intent/tweet?url=I%20scored%20'+score+'%20playing%20the%20Lil%20Shit%20Game%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
 
 			}
 		};
 		gameShareClean = {
 			won : {
 				fb: 'I scored '+score+' playing the Lil Poop Game and won!',
-				tw: 'http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20and%20won!%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
+				tw: 'http://twitter.com/intent/tweet?url=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20and%20won!%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
 
 			},
 			lost : {
 				fb: 'I scored '+score+' playing the Lil Poop Game!',
-				tw: 'http://twitter.com/intent/tweet?status=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
+				tw: 'http://twitter.com/intent/tweet?url=I%20scored%20'+score+'%20playing%20the%20Lil%20Poop%20Game%20http%3A%2F%2Fsamzabala.com%2Fbathroomrampage'
 
 			}
 		};
